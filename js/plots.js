@@ -88,7 +88,7 @@ function LF_PopulateMetadata(selectedMetadata) {
   //Add each key value pair to the metadata panel
   Object.entries(selectedMetadata).forEach(([key, value]) => {
     console.log(`${key}:${value}`);
-    
+
     var tr = table.selectAll('tr')
     .data(key)
     .enter()
