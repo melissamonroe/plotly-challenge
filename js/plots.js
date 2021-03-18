@@ -155,7 +155,7 @@ function LF_InitGauge() {
       type: "indicator",
       mode: "gauge+number",
       value: 0,
-      title: { text: "Belly Button Washing Frequency<br>Scrubs per Week", font: { size: 24 } },
+      title: { text: "Belly Button Washing Frequency<br>Scrubs per Week", font: { size: 16 } },
       
       gauge: {
         axis: { range: [null, 9] },   
