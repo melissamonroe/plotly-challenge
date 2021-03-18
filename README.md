@@ -1,36 +1,36 @@
-# Plot.ly Homework - Belly Button Biodiversity
+# Plot.ly Challenge - Belly Button Biodiversity
 
 ![Bacteria by filterforge.com](images/bacteria.jpg)
 
-In this assignment, you will build an interactive dashboard to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
+In this challenge, an interactive dashboard was built to explore the [Belly Button Biodiversity dataset](http://robdunnlab.com/projects/belly-button-biodiversity/), which catalogs the microbes that colonize human navels.
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
 
 ## Step 1: Plotly
 
-1. Use the D3 library to read in `samples.json`.
+1. Used the D3 library to read in `samples.json`.
 
-2. Create a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
+2. Created a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
 
-* Use `sample_values` as the values for the bar chart.
+* Used `sample_values` as the values for the bar chart.
 
-* Use `otu_ids` as the labels for the bar chart.
+* Used `otu_ids` as the labels for the bar chart.
 
-* Use `otu_labels` as the hovertext for the chart.
+* Used `otu_labels` as the hovertext for the chart.
 
   ![bar Chart](images/hw01.png)
 
 3. Create a bubble chart that displays each sample.
 
-* Use `otu_ids` for the x values.
+* Used `otu_ids` for the x values.
 
-* Use `sample_values` for the y values.
+* Used `sample_values` for the y values.
 
-* Use `sample_values` for the marker size.
+* Used `sample_values` for the marker size.
 
-* Use `otu_ids` for the marker colors.
+* Used `otu_ids` for the marker colors.
 
-* Use `otu_labels` for the text values.
+* Used `otu_labels` for the text values.
 
 ![Bubble Chart](images/bubble_chart.png)
 
@@ -40,40 +40,27 @@ The dataset reveals that a small handful of microbial species (also called opera
 
 ![hw](images/hw03.png)
 
-6. Update all of the plots any time that a new sample is selected.
-
-Additionally, you are welcome to create any layout that you would like for your dashboard. An example dashboard is shown below:
+6. All plots are updated any time that a new sample is selected.
 
 ![hw](images/hw02.png)
 
 ## Advanced Challenge Assignment (Optional)
 
-The following task is advanced and therefore optional.
+* Adapted the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
 
-* Adapt the Gauge Chart from <https://plot.ly/javascript/gauge-charts/> to plot the weekly washing frequency of the individual.
+* Example gauge chart modified to account for values ranging from 0 through 9.
 
-* You will need to modify the example gauge code to account for values ranging from 0 through 9.
-
-* Update the chart whenever a new sample is selected.
+* Chart is updated whenever a new sample is selected.
 
 ![Weekly Washing Frequency Gauge](images/gauge.png)
 
-## Deployment
+## Notes
 
-* Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo.
+* `console.log` was used inside js code to preview data
 
-* Ensure your repository has regular commits (i.e. 20+ commits) and a thorough README.md file
-
-## Hints
-
-* Use `console.log` inside of your JavaScript code to see what your data looks like at each step.
-
-* Refer to the [Plotly.js documentation](https://plot.ly/javascript/) when building the plots.
+* Reference to plotly documentation: [Plotly.js documentation](https://plot.ly/javascript/)
 
 ### About the Data
 
 Hulcr, J. et al.(2012) _A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable_. Retrieved from: [http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/](http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/)
 
-- - -
-
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.

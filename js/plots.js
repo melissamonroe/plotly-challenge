@@ -47,30 +47,25 @@ function LF_PopulateDashboard() {
 
     x = sliceValues;
     y = sliceLabels;
-    marker = {
-      size: sliceValues,
-      color: sortedSampleValues[0]["otu_ids"].slice(0,10)
-    };
 
     // // Note the extra brackets around 'x' and 'y'
     Plotly.restyle("bar-plot", "x", [x]);
     Plotly.restyle("bar-plot", "y", [y]);
 
+    var x_bubble = sortedSampleValues[0]["otu_ids"];
+    var y_bubble = sliceValues;
+    marker = {
+      size: sliceValues,
+      color: sortedSampleValues[0]["otu_ids"]
+    };
 
     // // Note the extra brackets around 'x' and 'y'
-    Plotly.restyle("bubble-plot", "x", [x]);
-    Plotly.restyle("bubble-plot", "y", [y]);
+    Plotly.restyle("bubble-plot", "x", [x_bubble]);
+    Plotly.restyle("bubble-plot", "y", [y_bubble]);
     Plotly.restyle("bubble-plot", "marker", [marker]);
-    
-    // marker: {
-    //   size: 18,
-    //   line: {
-    //     color: ['rgb(120,120,120)', 'rgb(120,120,120)', 'red', 'rgb(120,120,120)'],
-    //     width: [2, 2, 6, 2]}
-
   });
 
-}
+};
 
 function LF_PopulateNameSelector(names) {
   var selector = d3.select("#selDataset");    
@@ -80,33 +75,35 @@ function LF_PopulateNameSelector(names) {
           .text(n)
           .property("value", n);
   });  
-}
+};
 
 function LF_PopulateMetadata(selectedMetadata) {
+    console.log("metadata");
+    console.log(selectedMetadata);
+    d3.select("tbody").html("");
+
+    var metadataArr = []
+
+    // //Add each key value pair to the metadata panel
+    Object.entries(selectedMetadata).forEach(([key, value]) => {
+       console.log(`${key}:${value}`);
+       metadataArr.push(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`);
  
-  var table = d3.select("#metadata");
-  //Add each key value pair to the metadata panel
-  Object.entries(selectedMetadata).forEach(([key, value]) => {
-    console.log(`${key}:${value}`);
+    });
+    console.log(metadataArr);
 
-    var tr = table.selectAll('tr')
-    .data(key)
-    .enter()
-    .append('tr');
-
-    tr.append('td').html(`${key}`);
-    tr.append('td').html(`${value}`);
-
-    
-    table.append('tr')      
-      .data(value)
+    d3.select("tbody")
+      .selectAll("tr")
+      .data(metadataArr)
       .enter()
-  });
-     
+      .append("tr")
+      .html(function(d) {
+        return `<td>${d}</td>`;
+      });   
 
-  
-
-}
+      // Plotly restyle gauge plot
+      Plotly.restyle("gauge-plot", "value", [parseFloat(selectedMetadata["wfreq"])]);
+  };
 function LF_InitBubble() {
 
     //bubble chart
@@ -122,13 +119,15 @@ function LF_InitBubble() {
     var data = [trace1];
     
     var layout = {
-      title: 'Marker Size',
+      title: 'OTU Samples Bubble Plot',
+      xaxis: { title: "OTU ID"},
+      yaxis: { title: "Sample Value"},
       showlegend: false,      
     };
     
     Plotly.newPlot('bubble-plot', data, layout);
     
-}
+};
 function LF_InitBar() {
   var trace1 = {
     x: [],
@@ -140,20 +139,60 @@ function LF_InitBar() {
     var data = [trace1];
     
     var layout = {
-    title: "OTU Volumes by OTU ID",
+    title: "Top 10 OTUs present in individual",
     xaxis: { title: "Sample Value"},
     yaxis: { title: "OTU ID"}
     };
     
     Plotly.newPlot("bar-plot", data, layout);
     
-  }
+  };
 
+function LF_InitGauge() {
+
+  var data = [
+    {
+      type: "indicator",
+      mode: "gauge+number",
+      value: 0,
+      title: { text: "Belly Button Washing Frequency<br>Scrubs per Week", font: { size: 24 } },
+      
+      gauge: {
+        axis: { range: [null, 9] },   
+
+        bar: { color: "#4051BB" },
+        steps: [
+          // #ec6859 //red
+          // #ecb259 //orange
+          // #ddec59 //yellow
+          // #94ec59 //light green
+          // #59ec68 //green
+
+          { range: [0, 1], color: "#ec6859" },
+          { range: [1, 2], color: "#ec6859" },
+          { range: [2, 3], color: "#ecb259" },
+          { range: [3, 4], color: "#ecb259" },
+          { range: [4, 5], color: "#ddec59" },
+          { range: [5, 6], color: "#94ec59" },
+          { range: [6, 7], color: "#94ec59" },
+          { range: [7, 8], color: "#94ec59" },
+          { range: [8, 9], color: "#59ec68" },
+        ],
+      }
+    }
+  ];
+
+  
+  
+  var layout = { margin: { t: 0, b: 0 } };
+  Plotly.newPlot('gauge-plot', data, layout);
+};
 
 function init() {
   
   LF_InitBubble();
   LF_InitBar();
+  LF_InitGauge();
   LF_PopulateDashboard();
 
 };
